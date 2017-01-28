@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "jade": "^1.11.0",
     "jscs": "^3.0.7",
     "jshint": "^2.9.4"
   },
@@ -13,6 +15,7 @@
     "gulp-inject": "^4.2.0",
     "gulp-jscs": "^4.0.0",
     "gulp-jshint": "^2.0.4",
+    "gulp-nodemon": "^2.2.1",
     "jshint-stylish": "^2.2.1",
     "wiredep": "^4.0.0"
   },
