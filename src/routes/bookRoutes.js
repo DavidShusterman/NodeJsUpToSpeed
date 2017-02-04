@@ -5,7 +5,7 @@ var objectID = require('mongodb').ObjectID;
 
 
 var router = function (nav) {
-
+    var bookController = require('../controllers/bookController')(null,nav);
     bookRouter.use(function(req,res,next){
         if(!req.user){
             res.redirect('/');
@@ -14,37 +14,10 @@ var router = function (nav) {
     });
 
     bookRouter.route('/')
-        .get(function (req, res) {
-            var url = 'mongodb://localhost:27017/libraryApp';
-            mongodb.connect(url, function (err, db) {
-                var collection = db.collection('books');
-                collection.find({}).toArray(function (err, results) {
-                    res.render('bookListView', {
-                        title: "Books",
-                        nav: nav,
-                        books: results
-                    });
-                });
-            });
-        });
+        .get(bookController.getIndex);
 
     bookRouter.route('/:id')
-        .get(function (req, res) {
-            var id = new objectID(req.params.id);
-            var url = 'mongodb://localhost:27017/libraryApp';
-            mongodb.connect(url, function (err, db) {
-                var collection = db.collection('books');
-                collection.findOne({
-                    _id: id
-                }, function (err, results) {
-                    res.render('bookView', {
-                        title: "Book",
-                        nav: nav,
-                        book: results
-                    });
-                });
-            });
-        });
+        .get(bookController.getIndex);
     return bookRouter;
 };
 module.exports = router;
